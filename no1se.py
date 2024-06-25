@@ -2,6 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import NoSuchElementException
 import time
 from pathlib import Path
 import os
@@ -298,8 +300,23 @@ def msg_every_user():
                 user_message_box.send_keys(message)
                 time.sleep(1)
                 driver.find_element(By.ID, "btnSend").click()
+                page_source = driver.page_source
+                #Check 1
+                if "Catch אוסרת ומזהירה מפני שליחת מספרי טלפון!" in page_source:
+                    user_message_box.send_keys(Keys.CONTROL, 'a')
+                    time.sleep(1)
+                    user_message_box.send_keys(Keys.BACKSPACE)
 
                 message_count += 1
+                
+                #Checking if someone blocked you and if they did it will click ok
+                try:
+                    blocked_ok_button = driver.find_element(By.ID, "ok")
+                    time.sleep(1)
+                    blocked_ok_button.click()
+                except NoSuchElementException:
+                    pass
+
             except Exception as inner_e:
                 if not running:
                     break
