@@ -1,3 +1,5 @@
+![image](https://github.com/user-attachments/assets/09394ed5-cc33-4e16-8787-caf12f079e54)
+
 # no1seCatchMenu---to-no1se-a-predator
 ### ℹ️ An automation script with Selenium to automate tasks on a website called Catch Chat, where there are usually a lot of predators lurking.
 
